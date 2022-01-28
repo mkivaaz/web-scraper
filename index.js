@@ -20,6 +20,10 @@ const terms = [
     "play.google", 
     "apps.apple"]
 
+app.get('/', (req, res) => {
+    res.send("This is base api")
+})
+
 app.get('/results',  (req, res) => {
 
     if (req.method != 'GET') {
