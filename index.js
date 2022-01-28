@@ -3,26 +3,25 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const express = require('express')
 const cors = require('cors')
-const { attr } = require('cheerio/lib/api/attributes')
 
 const app = express()
 app.use(cors())
-
-const URL = 'https://lunar.app/'//replace URL here
 const terms = [
+    "mailto",
     "twitter", 
     "facebook", 
     "linkedin", 
-    "instagram",
+    "instagram", 
+    "pinterest",
+    "youtube",
     "tiktok",
     "snapchat",
+    "spotify",
     "github",
-    "play.google", 
+    "play.google",
+    "itunes.apple",
     "apps.apple"]
 
-app.get('/', (req, res) => {
-    res.send("This is base api")
-})
 
 app.get('/results',  (req, res) => {
 
@@ -74,21 +73,20 @@ app.get('/results',  (req, res) => {
 
         const data = {
             social: uniqueLinks,
-            // description: description,
-            // title:title,image:image, 
-            // type:type, 
+            description: description,
+            title:title,image:image, 
+            type:type, 
             meta_tags:meta_tags
         }
         res.send({
             result:'Ok',
-            items:data})
-        
+            items:data})      
 
         
-    }).catch(err => console.log(err))
+    }).catch(err =>  res.send({result: err}))
 })
 
 
 
 
-app.listen(3000, () => console.log(`Listening Port`))
+app.listen(PORT, () => console.log(`Listening Port`))
